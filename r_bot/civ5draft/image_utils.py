@@ -35,20 +35,39 @@ def concat_images(images: Iterable[Image.Image], axis: int = 0):
     return res
 
 
-def draw_name(name: str, namepic: Image.Image, position: str = 'center'):
+def draw_name(name: str, namepic: Image.Image, position: str = 'center', slot: int = None):
+    namepic = namepic.convert("RGBA")
     draw = ImageDraw.Draw(namepic)
     back_w, back_h = namepic.size
     text_w, text_h = draw.textsize(name, font=FONT)
     if position == 'center':
         text_pos = ((back_w - text_w) / 2, (back_h - text_h) / 2)
-    elif position == 'right':
+    else:
         text_pos = ((back_w - text_w) / 2 + back_w / 8, (back_h - text_h) / 2)
+
     draw.text(text_pos, name, font=FONT, fill=FONT_COLOR)
+
+    if slot is not None:
+        if position == 'center':
+            text_w, text_h = draw.textsize(str(slot), font=SCRIPT_FONT)
+            text_pos = (30, 20)
+            draw.text(text_pos, str(slot), font=SCRIPT_FONT, fill=FONT_COLOR)
+            draw.ellipse((text_pos[0] + text_w//2 - 32, text_pos[1] + text_h//2 - 32,
+                          text_pos[0] + text_w//2 + 32, text_pos[1] + text_h//2 + 32),
+                         fill=None, outline=(0, 0, 0), width=6)
+        # draw.ellipse((16, 8, 80, 72), fill=None, outline=(0, 0, 0), width=6)
+        else:
+            slotname = f"( {slot} )"
+            txt = Image.new('RGBA', namepic.size, (255, 255, 255, 0))
+            text_w, text_h = draw.textsize(slotname, font=TINY_FONT)
+            text_pos = ((back_w - text_w) / 2 - back_w / 4 - 10, 16)
+            draw.text(text_pos, slotname, font=TINY_FONT, fill=FONT_COLOR)
+
     return namepic
 
 
 def draw_avatar(background: Image.Image, avatar: Image.Image, circle=False,
-                border: Image.Image = None, av_side: int = 216):
+                border: Image.Image = None, av_side: int = 212):
     av_res = avatar.resize((av_side, av_side)).convert("RGBA")
     background = background.convert("RGBA")
 
@@ -68,8 +87,13 @@ def draw_avatar(background: Image.Image, avatar: Image.Image, circle=False,
     foreground.paste(av_res, box=(box_side, box_side), mask=mask)
     res = Image.alpha_composite(background, foreground)
 
-    if not circle:
-        pass
+    draw = ImageDraw.Draw(res)
+    contour_line_width = 4
+    # draw.line([(0, 0), (res.width, 0)], fill="black", width=contour_line_width)
+    draw.line([(0, res.height-6), (res.width, res.height-6)], fill="black", width=contour_line_width)
+
+    # if not circle:
+    #     pass
         # draw = ImageDraw.Draw(background)
         # draw.rectangle((32, 32, 222, 222), fill=None, outline=(0, 0, 0), width=6)
     return res

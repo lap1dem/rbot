@@ -1,12 +1,12 @@
 import random
 from typing import Iterable
-from src.civ5draft.data.civ_dict import civ_dict
+from r_bot.civ5draft.data.civ_dict import civ_dict
 
 ALL_NATIONS = list(set(civ_dict.values()))
 
 
 class Draft:
-    def __init__(self, players: Iterable[int], num_nations: int = 3, banned: Iterable[str] = []):
+    def __init__(self, players: Iterable[str], num_nations: int = 3, banned: Iterable[str] = []):
         self.players = players
         self.num_nations = num_nations
         self.banned = banned

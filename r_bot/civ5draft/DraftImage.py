@@ -35,8 +35,9 @@ class DraftImage:
             nickpos = 'right'
             namepicfile = 'NAME_AV.jpg'
         namepic = Image.open(os.path.join(ICONS_DIR, namepicfile))
-        for p_ in self.shuffled_players:
-            self.draft_names[p_] = draw_name(p_, namepic.copy(), nickpos)
+        for i in range(len(self.shuffled_players)):
+            p_ = self.shuffled_players[i]
+            self.draft_names[p_] = draw_name(self.shuffled_players[i], namepic.copy(), nickpos, slot=i+1)
 
     def _draw_avatars(self):
         border = Image.open(os.path.join(ICONS_DIR, f"avatars/border.png"))
@@ -51,7 +52,7 @@ class DraftImage:
 
     def get_image(self):
         blocks = [concat_images([self.draft_names[p_], self.draft_blocks[p_]]) for p_ in self.shuffled_players]
-        if len(blocks) % 2 == 1:
+        if (len(blocks) % 2 == 1 and len(blocks) > 3) or len(blocks) < 3:
             return concat_images(blocks, axis=1)
         else:
             row1 = concat_images(blocks[:len(blocks)//2], axis=1)
