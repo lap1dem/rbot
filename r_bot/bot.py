@@ -4,4 +4,4 @@ intents = dc.Intents.all()
 
 bot = dc.Bot(intents=intents)
 
-TOKEN = "OTgwOTU0ODQzMTUxNzQ5MTQw.GHrg99.tC3WshY0dQBJpe1AW84UDa8nsoZ0hKZQKLVHJA"
+TOKEN = "OTA2NTgwNjQxMDgzMTYyNjk1.YYatBA.8Wa12x7F1V8LcXih_A5SkPa2MuU"
