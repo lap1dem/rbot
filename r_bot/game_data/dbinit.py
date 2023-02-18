@@ -3,7 +3,7 @@ from urllib.parse import urlparse
 import redis
 import psycopg2 as psql
 
-url = urlparse(os.environ.get("REDIS_URL"))
+url = urlparse(os.environ['REDIS_URL'])
 DATABASE_URL = os.environ['DATABASE_URL']
 # url = urlparse("redis://:p74b9c7ec1b81e3384a5b6a77076443a17f34c2273316d001165144013def44b5@ec2-52-208-16-24.eu-west-1"
 #                ".compute.amazonaws.com:26780")
