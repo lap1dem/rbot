@@ -37,7 +37,9 @@ async def draft(
                            description_localizations=draft_par_stdbans_desc,
                            required=False, choices=[option_choice_yes, option_choice_no], default=option_choice_yes),
 ):
-    init_bans = ['Huns', 'Venice', 'Spain'] if stdbans.value else []
+    stdbans = stdbans.value if not isinstance(stdbans, int) else stdbans
+    skipbans = skipbans.value if not isinstance(skipbans, int) else skipbans
+    init_bans = ['Huns', 'Venice', 'Spain'] if stdbans else []
 
     players = split_players(ctx, players)
     if len(set(players)) < len(players):
@@ -48,8 +50,8 @@ async def draft(
 
     player_ids = [p.id for p in players]
     player_tags = [f"<@{pid}>" for pid in player_ids]
-
-    if skipbans.value:
+    skipbans = int(skipbans)
+    if skipbans:
         try:
             reaction = await ctx.respond(content=draft_skipbans_wait.get(ctx.guild.preferred_locale, draft_skipbans_wait['en-GB']))
             await draft_without_bans(reaction, player_ids, number, init_bans)
