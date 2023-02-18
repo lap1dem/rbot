@@ -16,9 +16,10 @@ class CivBanView1(dc.ui.View):
         for i in range(25):
             disabled = True if ALL_NATIONS[i] in bans else False
             style = ButtonStyle.red if ALL_NATIONS[i] in bans else ButtonStyle.secondary
-            button = CivBanButton(label=None, custom_id=ALL_NATIONS[i], emoji=emoji_dict[ALL_NATIONS[i]],
+            label = ALL_NATIONS[i][:3]
+            button = CivBanButton(label=label, custom_id=ALL_NATIONS[i], emoji=emoji_dict[ALL_NATIONS[i]],
                                   disabled=disabled, style=style)
-            self.add_item(button)
+            self.add_item(button, )
 
 
 class CivBanView2(dc.ui.View):
@@ -27,6 +28,7 @@ class CivBanView2(dc.ui.View):
         for i in range(25, 43):
             disabled = True if ALL_NATIONS[i] in bans else False
             style = ButtonStyle.red if ALL_NATIONS[i] in bans else ButtonStyle.secondary
-            button = CivBanButton(label=None, custom_id=ALL_NATIONS[i], emoji=emoji_dict[ALL_NATIONS[i]],
+            label = ALL_NATIONS[i][:3]
+            button = CivBanButton(label=label, custom_id=ALL_NATIONS[i], emoji=emoji_dict[ALL_NATIONS[i]],
                                   disabled=disabled, style=style)
             self.add_item(button)
