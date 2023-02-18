@@ -4,7 +4,7 @@ from .dbinit import data_conn
 @data_conn
 def table_exists(conn, cur, guild_name: str):
     if "'" in guild_name:
-        raise ValueError("Invalid guild name", guild_name)
+        raise ValueError("Invalid guild name " + guild_name)
 
     query = f"""
        SELECT FROM pg_tables WHERE schemaname='public' AND tablename='gamelist_{guild_name}'
