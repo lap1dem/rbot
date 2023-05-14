@@ -34,15 +34,6 @@ class GameRoles(discord.ui.View):
         await _get_remove_role(interaction, roles.Civilization_V_ID, 'Civilization V')
 
     @discord.ui.button(
-        label="Dota 2",
-        custom_id="dota2",
-        style=discord.ButtonStyle.primary,
-        emoji=":_game_dota2:981318723803684884",
-    )
-    async def dota2_button_callback(self, button, interaction):
-        await _get_remove_role(interaction, roles.Dota_2_ID, 'Dota 2')
-
-    @discord.ui.button(
         label="Humankind",
         custom_id="humankind",
         style=discord.ButtonStyle.primary,
@@ -59,15 +50,6 @@ class GameRoles(discord.ui.View):
     )
     async def gremlinsinc_button_callback(self, button, interaction):
         await _get_remove_role(interaction, roles.Gremlins_Inc_ID, 'Gremlins Inc.')
-
-    @discord.ui.button(
-        label="Minecraft",
-        custom_id="minecraft",
-        style=discord.ButtonStyle.primary,
-        emoji="_game_minecraft:989733924479574076",
-    )
-    async def hoi4_button_callback(self, button, interaction):
-        await _get_remove_role(interaction, roles.Mincraft_ID, 'Minecraft')
 
 
 async def setup_server_unlock():
