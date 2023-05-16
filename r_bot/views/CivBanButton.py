@@ -1,10 +1,10 @@
 import discord as dc
 from discord import ButtonStyle, Emoji, PartialEmoji, Interaction
 
-from ..game_data import RCONN, create_game
+from ..game_data import RCONN
+from ..localization.draft import *
 from ..tools.embeds import ban_progress_embed
 from ..tools.utils import send_draft_image
-from ..localization.draft import *
 
 
 class CivBanButton(dc.ui.Button):
@@ -22,6 +22,7 @@ class CivBanButton(dc.ui.Button):
                          custom_id=custom_id, url=url, emoji=emoji, row=row)
 
     async def callback(self, interaction: Interaction):
+        # TODO: Remove all Redis entrys after writing to Postgres
         tid = interaction.channel_id
         if RCONN.hexists(tid, self.emoji.name):
             await interaction.response.send_message(

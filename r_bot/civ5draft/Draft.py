@@ -1,5 +1,6 @@
 import random
 from typing import Iterable
+
 from r_bot.civ5draft.data.civ_dict import civ_dict
 
 ALL_NATIONS = list(set(civ_dict.values()))

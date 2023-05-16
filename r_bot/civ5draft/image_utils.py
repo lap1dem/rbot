@@ -1,9 +1,7 @@
-import os
-import random
-import numpy as np
 from typing import Iterable
 
 from PIL import Image, ImageDraw, ImageOps
+
 from .config import *
 
 
@@ -52,8 +50,8 @@ def draw_name(name: str, namepic: Image.Image, position: str = 'center', slot: i
             text_w, text_h = draw.textsize(str(slot), font=SCRIPT_FONT)
             text_pos = (30, 20)
             draw.text(text_pos, str(slot), font=SCRIPT_FONT, fill=FONT_COLOR)
-            draw.ellipse((text_pos[0] + text_w//2 - 32, text_pos[1] + text_h//2 - 32,
-                          text_pos[0] + text_w//2 + 32, text_pos[1] + text_h//2 + 32),
+            draw.ellipse((text_pos[0] + text_w // 2 - 32, text_pos[1] + text_h // 2 - 32,
+                          text_pos[0] + text_w // 2 + 32, text_pos[1] + text_h // 2 + 32),
                          fill=None, outline=(0, 0, 0), width=6)
         # draw.ellipse((16, 8, 80, 72), fill=None, outline=(0, 0, 0), width=6)
         else:
@@ -83,19 +81,19 @@ def draw_avatar(background: Image.Image, avatar: Image.Image, circle=False,
         # av_res.show()
         # assert 1==0
     foreground = Image.new("RGBA", background.size)
-    box_side = (256 - av_side)//2
+    box_side = (256 - av_side) // 2
     foreground.paste(av_res, box=(box_side, box_side), mask=mask)
     res = Image.alpha_composite(background, foreground)
 
     draw = ImageDraw.Draw(res)
     contour_line_width = 4
     # draw.line([(0, 0), (res.width, 0)], fill="black", width=contour_line_width)
-    draw.line([(0, res.height-6), (res.width, res.height-6)], fill="black", width=contour_line_width)
+    draw.line([(0, res.height - 6), (res.width, res.height - 6)], fill="black", width=contour_line_width)
 
     # if not circle:
     #     pass
-        # draw = ImageDraw.Draw(background)
-        # draw.rectangle((32, 32, 222, 222), fill=None, outline=(0, 0, 0), width=6)
+    # draw = ImageDraw.Draw(background)
+    # draw.rectangle((32, 32, 222, 222), fill=None, outline=(0, 0, 0), width=6)
     return res
 
 

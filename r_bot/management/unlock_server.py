@@ -1,7 +1,8 @@
 import discord
-from ..bot import bot
-from .config import GUILD_ID
+
 from . import roles
+from .config import GUILD_ID
+from ..bot import bot
 
 
 async def _get_remove_role(interaction, role_id, role_name):
@@ -19,6 +20,7 @@ async def _get_remove_role(interaction, role_id, role_name):
         )
         await member.add_roles(role)
         await interaction.response.send_message(embed=embed, ephemeral=True)
+
 
 class GameRoles(discord.ui.View):
     def __init__(self):

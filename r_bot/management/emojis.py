@@ -1,5 +1,6 @@
 from ..bot import bot
 
+
 @bot.event
 async def on_raw_reaction_add(payload):
     if "980644696571400324" in str(payload.emoji):

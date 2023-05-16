@@ -1,17 +1,17 @@
-import discord as dc
 import io
 
+import discord as dc
 import requests
 from PIL import Image
 
 from ..bot import bot
 from ..civ5draft import Draft, DraftImage
-from ..views.CivBanView import CivBanView1, CivBanView2
-from ..tools.utils import split_players
-from ..tools.embeds import ban_progress_embed
 from ..game_data import RCONN, create_game
 from ..localization.draft import *
 from ..localization.general import *
+from ..tools.embeds import ban_progress_embed
+from ..tools.utils import split_players
+from ..views.CivBanView import CivBanView1, CivBanView2
 
 
 @bot.slash_command(
@@ -53,7 +53,8 @@ async def draft(
     skipbans = int(skipbans)
     if skipbans:
         try:
-            reaction = await ctx.respond(content=draft_skipbans_wait.get(ctx.guild.preferred_locale, draft_skipbans_wait['en-GB']))
+            reaction = await ctx.respond(
+                content=draft_skipbans_wait.get(ctx.guild.preferred_locale, draft_skipbans_wait['en-GB']))
             await draft_without_bans(reaction, player_ids, number, init_bans)
             return
         except Exception as e:

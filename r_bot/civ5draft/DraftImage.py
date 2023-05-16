@@ -1,9 +1,10 @@
 import random
-from typing import Dict, List, Iterable
-import os
+from typing import Dict, List
+
 from PIL import Image
-from .image_utils import concat_images, draw_name, draw_avatar
+
 from .config import *
+from .image_utils import concat_images, draw_name, draw_avatar
 
 
 class DraftImage:
@@ -23,7 +24,7 @@ class DraftImage:
 
     def _generate_draft_blocks(self):
         for p_ in self.shuffled_players:
-            nations_images = [Image.open(os.path.join(ICONS_CIV_DIR, nation_+".jpg"))
+            nations_images = [Image.open(os.path.join(ICONS_CIV_DIR, nation_ + ".jpg"))
                               for nation_ in self.drafted_nations[p_]]
             self.draft_blocks[p_] = concat_images(nations_images, axis=0)
 
@@ -37,7 +38,7 @@ class DraftImage:
         namepic = Image.open(os.path.join(ICONS_DIR, namepicfile))
         for i in range(len(self.shuffled_players)):
             p_ = self.shuffled_players[i]
-            self.draft_names[p_] = draw_name(self.shuffled_players[i], namepic.copy(), nickpos, slot=i+1)
+            self.draft_names[p_] = draw_name(self.shuffled_players[i], namepic.copy(), nickpos, slot=i + 1)
 
     def _draw_avatars(self):
         border = Image.open(os.path.join(ICONS_DIR, f"avatars/border.png"))
@@ -55,7 +56,6 @@ class DraftImage:
         if (len(blocks) % 2 == 1 and len(blocks) > 3) or len(blocks) < 3:
             return concat_images(blocks, axis=1)
         else:
-            row1 = concat_images(blocks[:len(blocks)//2], axis=1)
-            row2 = concat_images(blocks[len(blocks)//2:], axis=1)
+            row1 = concat_images(blocks[:len(blocks) // 2], axis=1)
+            row2 = concat_images(blocks[len(blocks) // 2:], axis=1)
             return concat_images([row1, row2])
-

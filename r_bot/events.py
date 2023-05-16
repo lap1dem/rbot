@@ -9,9 +9,6 @@ async def on_ready():
     await setup_server_unlock()
     bot.add_view(GameRoles())
     for guild in bot.guilds:
-        # if guild.id != 980606597581660230 and guild != 1055210867517562940:
-        #     await guild.leave()
-        #     continue
         if not data.table_exists(f"{guild.name}"):
             data.create_gamelist(guild.name)
 

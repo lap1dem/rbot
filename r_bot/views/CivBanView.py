@@ -2,9 +2,8 @@ from typing import List
 
 import discord as dc
 from discord import ButtonStyle
+
 from .CivBanButton import CivBanButton
-
-
 from ..other_data.emoji_dict import emoji_dict
 
 ALL_NATIONS = list(emoji_dict.keys())

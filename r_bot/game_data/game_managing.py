@@ -1,5 +1,6 @@
 from .dbinit import data_conn
 
+
 @data_conn
 def create_game(conn, cur, server, thread_id, players_ids, ranked=False):
     if len(players_ids) > 8:
